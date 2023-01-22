@@ -1,5 +1,12 @@
 # Changelog
 
+## 14.17.0
+
+- Added: `function-url-quotes` autofix ([#6558](https://github.com/stylelint/stylelint/pull/6558)) ([@mattxwang](https://github.com/mattxwang)).
+- Added: message arguments to `declaration-property-unit-allowed-list` ([#6570](https://github.com/stylelint/stylelint/pull/6570)) ([@mattxwang](https://github.com/mattxwang)).
+- Fixed: `at-rule-no-unknown` false positives for `@scroll-timeline` ([#6554](https://github.com/stylelint/stylelint/pull/6554)) ([@mattxwang](https://github.com/mattxwang)).
+- Fixed: `overrides.files` in config to allow basename glob patterns ([#6547](https://github.com/stylelint/stylelint/pull/6547)) ([@ybiquitous](https://github.com/ybiquitous)).
+
 ## 14.16.1
 
 - Fixed: `customSyntax` resolution with `configBasedir` ([#6536](https://github.com/stylelint/stylelint/pull/6536)) ([@ybiquitous](https://github.com/ybiquitous)).
