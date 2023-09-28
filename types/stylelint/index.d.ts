@@ -1,6 +1,7 @@
 import type * as PostCSS from 'postcss';
 import type { GlobbyOptions } from 'globby';
 import type { cosmiconfig, TransformSync as CosmiconfigTransformSync } from 'cosmiconfig';
+import { Severity } from '../../lib/formatters/preprocessWarnings';
 
 type ConfigExtends = string | string[];
 type ConfigPlugins = string | stylelint.Plugin | (string | stylelint.Plugin)[];
@@ -51,6 +52,10 @@ type EmptyResult = {
 // and in the original discussion: https://github.com/stylelint/stylelint/pull/6147#issuecomment-1155337016.
 type RuleMessageFunc = {
 	bivariance(...args: (string | number | boolean | RegExp)[]): string;
+}['bivariance'];
+
+type RuleSeverityFunc = {
+	bivariance(...args: (string | number | boolean | RegExp)[]): Severity | null;
 }['bivariance'];
 
 type RuleOptionsPossibleFunc = (value: unknown) => boolean;
@@ -138,7 +143,7 @@ declare namespace stylelint {
 
 	/** @internal */
 	type StylelintPostcssResult = {
-		ruleSeverities: { [ruleName: string]: Severity };
+		ruleSeverities: { [ruleName: string]: RuleSeverity };
 		customMessages: { [ruleName: string]: RuleMessage };
 		ruleMetadata: { [ruleName: string]: Partial<RuleMeta> };
 		quiet?: boolean;
@@ -191,6 +196,9 @@ declare namespace stylelint {
 			| Record<string, RuleOptionsPossible[]>;
 		optional?: boolean;
 	};
+
+	/** @internal */
+	type RuleSeverity = Severity | RuleSeverityFunc;
 
 	/**
 	 * A rule context.
@@ -432,7 +440,7 @@ declare namespace stylelint {
 		/**
 		 * Optional severity override for the problem.
 		 */
-		severity?: Severity;
+		severity?: RuleSeverity;
 	};
 
 	/** @internal */
